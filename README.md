@@ -16,16 +16,16 @@ The system supports core library functions:
 The repository is organized into two main parts: the original procedural code and the new OOP solution.
 
 library-management-oop/  
-&ensp│   
-&ensp├── README.md  
-&ensp│  
-&ensp├── procedural_version/  
-&ensp│&emsp├── library_procedural.py  
-&ensp│&emsp└── test_procedural.py  
-&ensp│   
-&ensp└── oop_solution/  
-&ensp&emsp ├── library_oop.py  
-&ensp&emsp └── test_oop.py  
+&ensp;│   
+&ensp;├── README.md  
+&ensp;│  
+&ensp;├── procedural_version/  
+&ensp;│&emsp;├── library_procedural.py  
+&ensp;│&emsp;└── test_procedural.py  
+&ensp;│   
+&ensp;└── oop_solution/  
+&ensp;&emsp; ├── library_oop.py  
+&ensp;&emsp; └── test_oop.py  
 
 ## 3. Design Overview
 
