@@ -1,4 +1,4 @@
-from library_oop import Book, Member
+from library_oop import Book, Member, Library
 
 def test_book_class():
     print("="*60)
@@ -76,8 +76,33 @@ def test_member_class():
 
     print("="*60)
     print("Member Class Tested")
+    print("="*60+"\n")
+
+
+def test_library_class_basic():
+    print("="*60)
+    print("Testing Library Class (Basic)")
+    print("="*60)
+
+    library = Library()
+    
+    # Test adding books
+    library.add_book(1, "Book A", "Author A", 1)
+    assert library.find_book(1).title == "Book A"
+    
+    # Test adding members
+    library.add_member(101, "Member 1", "m1@email.com")
+    assert library.find_member(101).name == "Member 1"
+    
+    # Test finding non-existent items
+    assert library.find_book(99) is None
+    assert library.find_member(999) is None
+    
+    print("="*60)
+    print("Library Class Basic Tested")
     print("="*60)
 
 if __name__ == "__main__":
     test_book_class()
     test_member_class()
+    test_library_class_basic()
