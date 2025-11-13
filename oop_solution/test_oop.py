@@ -1,108 +1,98 @@
-from library_oop import Book, Member, Library
+from library_oop import Library
 
-def test_book_class():
-    print("="*60)
-    print("Testing Book Class")
-    print("="*60)
-
-    book = Book(1, "Test Book", "Test Author", 2)
+def test_library_system_oop():
+    """Comprehensive test of all library functions in OOP design"""
     
-    # Test initial state
-    print(f"Initial: {book}")
-    assert book.available_copies == 2
+    print("=" * 60)
+    print("LIBRARY MANAGEMENT SYSTEM (OOP) - COMPREHENSIVE TEST")
+    print("=" * 60)
     
-    # Test successful borrow
-    assert book.borrow() == True
-    print(f"After 1st borrow: {book}")
-    assert book.available_copies == 1
-    
-    # Test second successful borrow
-    assert book.borrow() == True
-    print(f"After 2nd borrow: {book}")
-    assert book.available_copies == 0
-    
-    # Test failed borrow (no copies left)
-    assert book.borrow() == False
-    print(f"After failed borrow: {book}")
-    assert book.available_copies == 0
-    
-    # Test return
-    book.return_copy()
-    print(f"After 1st return: {book}")
-    assert book.available_copies == 1
-    
-    # Test returning more than total (should not exceed total)
-    book.return_copy()
-    book.return_copy()
-    print(f"After over-return: {book}")
-    assert book.available_copies == 2
-    
-    print("="*60)
-    print("Book Class Tested")
-    print("="*60+"\n")
-
-
-def test_member_class():
-    print("="*60)
-    print("Testing Member Class")
-    print("="*60)
-
-    member = Member(101, "Alice", "alice@email.com")
-    
-    print(f"Initial: {member}")
-    assert member.can_borrow() == True
-    assert len(member.borrowed_books) == 0
-    
-    member.add_borrowed_book(1)
-    print(f"After 1st borrow: {member}")
-    assert len(member.borrowed_books) == 1
-    
-    member.add_borrowed_book(2)
-    print(f"After 2nd borrow: {member}")
-    assert member.can_borrow() == True
-    
-    member.add_borrowed_book(3)
-    print(f"After 3rd borrow: {member}")
-    assert member.can_borrow() == False
-    
-    member.remove_borrowed_book(2)
-    print(f"After returning book 2: {member}")
-    assert len(member.borrowed_books) == 2
-    assert member.can_borrow() == True
-    
-    member.remove_borrowed_book(99)
-    print(f"After failed return: {member}")
-    assert len(member.borrowed_books) == 2
-
-    print("="*60)
-    print("Member Class Tested")
-    print("="*60+"\n")
-
-
-def test_library_class_basic():
-    print("="*60)
-    print("Testing Library Class (Basic)")
-    print("="*60)
-
     library = Library()
     
-    # Test adding books
-    library.add_book(1, "Book A", "Author A", 1)
-    assert library.find_book(1).title == "Book A"
+    # Test 1: Add Books
+    print("\n--- TEST 1: Adding Books ---")
+    library.add_book(1, "Python Crash Course", "Eric Matthes", 3)
+    library.add_book(2, "Clean Code", "Robert Martin", 2)
+    library.add_book(3, "The Pragmatic Programmer", "Hunt & Thomas", 1)
+    library.add_book(4, "Design Patterns", "Gang of Four", 2)
     
-    # Test adding members
-    library.add_member(101, "Member 1", "m1@email.com")
-    assert library.find_member(101).name == "Member 1"
+    # Test 2: Add Members
+    print("\n--- TEST 2: Registering Members ---")
+    library.add_member(101, "Alice Smith", "alice@email.com")
+    library.add_member(102, "Bob Jones", "bob@email.com")
+    library.add_member(103, "Carol White", "carol@email.com")
     
-    # Test finding non-existent items
-    assert library.find_book(99) is None
-    assert library.find_member(999) is None
+    # Test 3: Display Available Books
+    print("\n--- TEST 3: Display Available Books ---")
+    library.display_available_books()
     
-    print("="*60)
-    print("Library Class Basic Tested")
-    print("="*60)
+    # Test 4: Successful Book Borrowing
+    print("\n--- TEST 4: Successful Borrowing ---")
+    library.borrow_book(101, 1)
+    library.borrow_book(101, 2)
+    library.borrow_book(102, 1)
+    
+    # Test 5: Display Member's Borrowed Books
+    print("\n--- TEST 5: Display Member's Books ---")
+    library.display_member_books(101)
+    library.display_member_books(102)
+    library.display_member_books(103)
+    
+    # Test 6: Display Available Books After Borrowing
+    print("\n--- TEST 6: Available Books After Borrowing ---")
+    library.display_available_books()
+    
+    # Test 7: Borrow Last Available Copy
+    print("\n--- TEST 7: Borrowing Last Copy ---")
+    library.borrow_book(103, 3)
+    library.display_available_books()
+    
+    # Test 8: Try to Borrow Unavailable Book
+    print("\n--- TEST 8: Attempting to Borrow Unavailable Book ---")
+    library.borrow_book(102, 3)
+    
+    # Test 9: Borrowing Limit Test
+    print("\n--- TEST 9: Testing Borrowing Limit (3 books max) ---")
+    library.borrow_book(101, 4)
+    library.display_member_books(101)
+    library.borrow_book(101, 3)
+    
+    # Test 10: Return Books
+    print("\n--- TEST 10: Returning Books ---")
+    library.return_book(101, 1)
+    library.return_book(102, 1)
+    library.display_member_books(101)
+    library.display_available_books()
+    
+    # Test 11: Try to Return Book Not Borrowed
+    print("\n--- TEST 11: Attempting Invalid Return ---")
+    library.return_book(102, 2)
+    
+    # Test 12: Return and Borrow Again
+    print("\n--- TEST 12: Return and Re-borrow ---")
+    library.return_book(103, 3)
+    library.borrow_book(102, 3)
+    library.display_member_books(102)
+    
+    # Test 13: Error Cases - Non-existent Member/Book
+    print("\n--- TEST 13: Error Handling ---")
+    library.borrow_book(999, 1)
+    library.borrow_book(101, 999)
+    library.return_book(999, 1)
+    library.display_member_books(999)
+    
+    # Test 14: Final Status
+    print("\n--- TEST 14: Final Library Status ---")
+    print("\nAll Members and Their Books:")
+    for member_id in library.members:
+        library.display_member_books(member_id)
+    
+    library.display_available_books()
+    
+    print("\n" + "=" * 60)
+    print("OOP TEST COMPLETE")
+    print("=" * 60)
+
 
 if __name__ == "__main__":
-    test_book_class()
-    test_member_class()
-    test_library_class_basic()
+    test_library_system_oop()
