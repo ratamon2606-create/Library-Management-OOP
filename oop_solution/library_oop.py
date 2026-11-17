@@ -91,6 +91,12 @@ class Library:
         if not member.can_borrow():
             print("Error: Member has reached borrowing limit!")
             return False
+
+        # Borrowed books are represented by unique IDs, not per-copy counts.
+        # Reject a second loan of the same title to keep inventory consistent.
+        if book_id in member.borrowed_books:
+            print("Error: Member has already borrowed this book!")
+            return False
         
         book.borrow()
         member.add_borrowed_book(book_id)

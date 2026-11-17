@@ -76,7 +76,7 @@ Acts as the central controller for the entire system, managing the collections a
 
 ## 4. Testing
 
-The solution includes a comprehensive test suite in `oop_solution/test_oop.py`. This script is designed to be run from the command line and validates the entire system's functionality, including both basic operations and critical edge cases.
+The original demonstration script `oop_solution/test_oop.py` prints scenarios for manual inspection. Additional automated regression tests in `oop_solution/test_regression.py` use `unittest` assertions to verify inventory, borrowing limits, duplicate loans, and error cases.
 
 ### Test Coverage
 
@@ -96,7 +96,7 @@ The `test_library_system_oop()` function covers the following scenarios, mirrori
 
 ### How to Run the Test
 
-You can run the full test suite from your terminal.
+Run the automated regression tests from the repository root with `python3 -m unittest discover -s oop_solution -p "test_regression.py" -v`. The original output demonstration is still available separately.
 
 1.  Navigate to the project's root directory (`library-management-oop/`).
 2.  Execute the `test_oop.py` script:
